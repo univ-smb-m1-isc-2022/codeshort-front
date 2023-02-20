@@ -1,0 +1,65 @@
+<article *ngIf="anecdote;else case_null" class="anecdote-card">
+
+    <div class="topics">
+        <div *ngFor="let topic of anecdote.topics" class="topic">
+            <strong> {{ topic }} </strong>
+        </div>
+    </div>
+
+    <div class="description">
+        {{ anecdote.description }}
+    </div>
+
+    <div class="interactions">
+        <div>
+            <img src="../../../assets/images/upvote.svg"/>
+            {{ anecdote.upvotes }}
+        </div>
+        <div>
+            <img src="../../../assets/images/downvote.svg"/>
+            {{ anecdote.downvotes }}
+        </div>      
+        <div>
+            <img src="../../../assets/images/star.svg"/>
+            {{ anecdote.stars }}
+        </div>
+        <div>
+            <img src="../../../assets/images/user.svg"/>
+            {{ anecdote.owner }}
+        </div>
+    </div>
+
+</article>
+
+<ng-template #case_null>
+    <article class="anecdote-card">
+        <div class="topics">
+            <div class="topic">
+                <strong> Topic </strong>
+            </div>
+        </div>
+    
+        <div class="description">
+            description
+        </div>
+    
+        <div class="interactions">
+            <div>
+                <img src="../../../assets/images/upvote.svg"/>
+                0
+            </div>
+            <div>
+                <img src="../../../assets/images/downvote.svg"/>
+                0
+            </div>      
+            <div>
+                <img src="../../../assets/images/star.svg"/>
+                0
+            </div>
+            <div>
+                <img src="../../../assets/images/user.svg"/>
+                User
+            </div>
+        </div>
+    </article>
+</ng-template>

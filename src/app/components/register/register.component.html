@@ -1,0 +1,21 @@
+<div class="main">
+    <article class="login">
+        <div class="title">
+            <strong>CodeShort</strong>
+        </div>
+
+        <form #registerForm= "ngForm" (ngSubmit)="onSubmitForm(registerForm)">
+            <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="Pseudonyme" required>
+            <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="Mail" required>
+            <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <input [(ngModel)]="userConfirmPassword" type="password" id="userConfirmPassword" name="userConfirmPassword" placeholder="Confirmer mot de passe" required>
+            <input [(ngModel)]="userGitHub" type="url" id="userGitHub" name="userGitHub" placeholder="URL GitHub (optionnel)">
+            <button type="submit" class="connection">Inscription</button>
+        </form>
+
+        <div class="bottom">
+            <button (click)="goToLogin()" class="back-login">Retourner au login</button>
+        </div>
+    </article>
+</div>
+

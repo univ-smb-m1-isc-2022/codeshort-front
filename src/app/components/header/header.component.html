@@ -1,0 +1,25 @@
+<nav class="nav">
+    <ul>
+        <li class="title">CodeShort</li>
+    </ul>
+    <ul>
+        <input type="search" id="search" name="search" placeholder="Search" class="search">
+    </ul>
+    <ul *ngIf="user$ | async; else elseBlock">
+        <li class="profil">
+            <img src="../../../assets/images/example.png" class="profil">
+            {{ user$ | async }}
+        </li>
+    </ul>
+    <ng-template #elseBlock>
+        <ul>
+            <li class="profil">
+                <button (click)="goToLogin()" class="goToLogin">Se connecter</button>
+            </li>
+        </ul>        
+    </ng-template>
+</nav>
+
+<div class="children">
+    <router-outlet></router-outlet>
+</div>
