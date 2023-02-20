@@ -60,4 +60,10 @@ export class AnecdotesService {
         if(this.currentId == this.anecdotes.length) this.currentId = 0;
         this.anecdote.next(this.anecdotes[this.currentId]);
     }
+
+    previous() {
+        this.currentId--;
+        if(this.currentId == -1) this.currentId = this.anecdotes.length - 1;
+        this.anecdote.next(this.anecdotes[this.currentId]);
+    }
 }

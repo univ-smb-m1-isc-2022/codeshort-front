@@ -1,3 +1,3 @@
-<div (click)="next()" class="main">
-    <app-anecdote [@annotationAnimation]="anecdoteState" [anecdote]="anecdote$ | async" class="anecdote"></app-anecdote>
+<div class="main">
+    <app-anecdote [@transition]="anecdoteState" [anecdote]="anecdote$ | async" class="anecdote"></app-anecdote>
 </div>
