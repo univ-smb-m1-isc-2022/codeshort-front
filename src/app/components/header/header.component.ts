@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { tap } from 'rxjs/internal/operators/tap';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 
 @Component({
@@ -21,5 +20,13 @@ export class HeaderComponent implements OnInit {
 
   goToLogin() : void {
     this.router.navigateByUrl('login');
+  }
+
+  goToProfil() {
+    this.router.navigateByUrl('home/profil');
+  }
+
+  goToHome() {
+    this.router.navigateByUrl('home');
   }
 }

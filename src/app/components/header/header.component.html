@@ -1,12 +1,12 @@
 <nav class="nav">
     <ul>
-        <li class="title"><strong>CodeShort</strong></li>
+        <li (click)="goToHome()" class="title"><strong>CodeShort</strong></li>
     </ul>
     <ul>
         <input type="search" id="search" name="search" placeholder="Search" class="search">
     </ul>
     <ul *ngIf="user$ | async; else elseBlock">
-        <li class="profil">
+        <li (click)="goToProfil()" class="profil">
             <img src="../../../assets/images/example.png" class="profil">
             {{ user$ | async }}
         </li>

@@ -18,7 +18,7 @@ export class AuthentificationService {
       })
     }
 
-    private user = new BehaviorSubject<String | null>(null);
+    private user = new BehaviorSubject<String | null>(localStorage.getItem("username"));
     user$ = this.user.asObservable();
   
     constructor(private httpClient: HttpClient) { }

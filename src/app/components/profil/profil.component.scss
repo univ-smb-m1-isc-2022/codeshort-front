@@ -1,0 +1,58 @@
+.main { 
+    height: 100%;
+}
+
+.band {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+    width: 100%;
+    background: rgb(215,168,98);
+}
+
+.profil {
+    margin: 10px;
+    width: same-as-height;
+    height: 80%;
+    border-radius: 50%;
+}
+
+.utils {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.btn {
+    background: none;
+    border: solid 1px black;
+    color: black;
+    width: 10%;
+    font-size: 1vw;
+}
+
+.username {
+    color: black;
+    margin-left: 5%;
+    font-size: 25px;
+}
+
+.list-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anecdotes-list {
+    margin-top: -5vh;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+}

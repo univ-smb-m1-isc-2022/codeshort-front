@@ -1,0 +1,18 @@
+<div class="main">
+    <div class="band">
+        <img src="../../../assets/images/example.png" class="profil">
+        <p class="username">{{ user$ | async }}</p>
+        <div class="utils">
+            <button class="btn">Follow</button>
+            <button class="btn">GitHub</button>
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="anecdotes-list">
+            <app-anecdote 
+                *ngFor="let anecdote of anecdotes" 
+                [anecdote]="anecdote">
+            </app-anecdote>
+        </div>
+    </div>
+</div>
