@@ -41,8 +41,8 @@ export class AnecdoteComponent {
           this.anecdote!.downvotes -= 1;
         });
       } else {
-        this.anecdote!.vote = Vote.DOWNVOTE;
         this.anecdotesService.setVote(this.anecdote.id, Vote.DOWNVOTE, this.anecdote.starred).subscribe(data => {
+          console.log(this.anecdote?.vote);
           if (this.anecdote!.vote == Vote.UPVOTE) {
             this.anecdote!.upvotes -= 1;
           }
@@ -52,4 +52,14 @@ export class AnecdoteComponent {
       }
     }
   }
+
+  starClicked() {
+    if(this.anecdote){
+      var newState = !this.anecdote.starred;
+      this.anecdotesService.setVote(this.anecdote.id, this.anecdote.vote, newState).subscribe(data => {
+        this.anecdote!.starred = newState;
+      });
+    }
+  }
+
 }

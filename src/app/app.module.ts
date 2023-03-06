@@ -10,9 +10,10 @@ import { AnecdoteComponent } from './components/anecdote/anecdote.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProfilComponent } from './components/profil/profil.component';
 import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
+import { TokenInterceptor } from './token-interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { CreateAnecdoteComponent } from './components/create-anecdote/create-ane
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

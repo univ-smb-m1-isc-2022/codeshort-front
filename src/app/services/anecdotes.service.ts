@@ -18,13 +18,6 @@ export class AnecdotesService {
     private anecdote = new BehaviorSubject<Anecdote | null>(null);
     anecdote$ = this.anecdote.asObservable();
     private anecdotes: Anecdote[] = [];
-    
-    httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-      })
-    }
 
     constructor(private httpClient: HttpClient){}
 
@@ -43,14 +36,14 @@ export class AnecdotesService {
     }
 
     getAllTopics(): Observable<any> {
-      return this.httpClient.get<any>(environment.apiKey + "/topic", this.httpOptions)
+      return this.httpClient.get<any>(environment.apiKey + "/topic")
         .pipe(
           catchError(this.errorHandler)
         )
     }
 
     createAnecdote(request: any): Observable<any> {
-      return this.httpClient.post<any>(this.apiURL, JSON.stringify(request), this.httpOptions)
+      return this.httpClient.post<any>(this.apiURL, JSON.stringify(request))
         .pipe(
           catchError(this.errorHandler)
         )
@@ -68,19 +61,14 @@ export class AnecdotesService {
         this.anecdote.next(this.anecdotes[this.currentId]);
     }
   
-  setVote(anecdoteId: number, vote: Vote, starred: boolean) {
+    setVote(anecdoteId: number, vote: Vote, starred: boolean) {
 
-    let route = this.apiURL + "/" + anecdoteId + "/rating";
+      let route = this.apiURL + "/" + anecdoteId + "/rating";
 
-    let request = JSON.stringify({ vote: vote, starred: starred });
+      let request = JSON.stringify({ vote: vote, starred: starred });
 
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    });
-
-    return this.httpClient.post<any>( route, request,{ headers: headers }).pipe( catchError(this.errorHandler))  
-  }
+      return this.httpClient.post<any>( route, request).pipe( catchError(this.errorHandler))  
+    }
 
     errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
         let errorMessage = '';

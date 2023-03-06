@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
     this.anecdotesService.getRandomAnecdotes().subscribe(data => {
       var anecdotesTmp: Anecdote[] = [];
       data.anecdotes.forEach((e : any) => {
-        console.log(e);
         var anecdote: Anecdote = {
           id: e.id,
           topics: e.topics,

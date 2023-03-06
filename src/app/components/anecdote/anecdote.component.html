@@ -23,8 +23,10 @@
             <ng-template #notCheckDownvote><img src="../../../assets/images/downvote.svg"/></ng-template>
             {{ anecdote.downvotes }}
         </div>      
-        <div>
-            <img src="../../../assets/images/star.svg"/>
+        <div (click)="starClicked()">
+            <div *ngIf="anecdote.starred; then checkStarred else notCheckStarred"></div>
+            <ng-template #checkStarred><img src="../../../assets/images/star_checked.svg"/></ng-template>
+            <ng-template #notCheckStarred><img src="../../../assets/images/star.svg"/></ng-template>
         </div>
         <div>
             <img src="../../../assets/images/user.svg"/>
