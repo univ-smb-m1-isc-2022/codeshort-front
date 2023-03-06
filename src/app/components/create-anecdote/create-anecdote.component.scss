@@ -1,0 +1,38 @@
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    min-width: 500px;
+}
+
+form button{
+    border: solid black 1px;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    width: 100%;
+}
+
+#main-button {
+    background-color: rgb(215,168,98);
+    color: white;
+    border: none;
+}
+
+.title {
+    text-align: center;
+    font-size: 4vw;
+    margin-bottom: 20px;
+    font-family: 'Montserrat';
+    color: black;
+    margin-top: 75px;
+}
+
+@media screen and (max-width: 900px) {
+    .title {
+        font-size: 3rem;
+    }
+}
