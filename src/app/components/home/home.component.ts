@@ -1,7 +1,7 @@
 import { animate, transition, trigger, style, keyframes, state } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { delay, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   anecdote$!: Observable<Anecdote | null>;
   user$!: Observable<String | null>;
   anecdoteState = "inview";
+  canRoll = true;
 
   constructor(
     private anecdotesService: AnecdotesService, 
@@ -62,8 +63,8 @@ export class HomeComponent implements OnInit {
           vote: e.vote
         };
         anecdotesTmp.push(anecdote);
-        this.anecdotesService.setAnecdotes(anecdotesTmp);
       });
+      this.anecdotesService.setAnecdotes(anecdotesTmp);
     });
     this.anecdote$ = this.anecdotesService.anecdote$.pipe();
     this.user$ = this.authentificationService.user$;
@@ -80,19 +81,25 @@ export class HomeComponent implements OnInit {
   @HostListener('wheel', ['$event'])
   public onViewportScroll() {
     let wheelEvent: WheelEvent = event as WheelEvent
-    if(wheelEvent.deltaY > 0) {
-      this.anecdoteState = "bottom"
+    if(this.canRoll){
+      this.canRoll = false;
+      if(wheelEvent.deltaY > 0) {
+        this.anecdoteState = "bottom"
+        setTimeout(() => {
+          this.next()
+          this.anecdoteState = "inview"
+        }, 500);
+      }
+      else if(wheelEvent.deltaY < 0) {
+        this.anecdoteState = "top"
+        setTimeout(() => {
+          this.previous()
+          this.anecdoteState = "inview"
+        }, 500);
+      }
       setTimeout(() => {
-        this.next()
-        this.anecdoteState = "inview"
-      }, 500);
-    }
-    else if(wheelEvent.deltaY < 0) {
-      this.anecdoteState = "top"
-      setTimeout(() => {
-        this.previous()
-        this.anecdoteState = "inview"
-      }, 500);
+        this.canRoll = true;
+      }, 800);
     }
   }
 

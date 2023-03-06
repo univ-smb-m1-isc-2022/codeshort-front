@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
-import { Vote } from 'src/models/vote.model';
 
 @Component({
   selector: 'app-profil',
@@ -12,45 +13,73 @@ import { Vote } from 'src/models/vote.model';
 })
 export class ProfilComponent implements OnInit {
 
-  user$!: Observable<String | null>;
+  user!: string;
+  me: string | null = this.authentificationService.getUser();
+  starredFilter!: boolean;
+  anecdotes$!: Observable<Anecdote[] | null>;
 
-  anecdotes: Anecdote[] = [
-    {
-        id: 0,
-        topics: ["JS","Humour","Back"],
-        description: "Test 1",
-        upvotes: 5,
-        downvotes: 6,
-        starred: true,
-        owner: "Mathis",
-        vote: Vote.NONE
-    },
-    {
-        id: 1,
-        topics: ["Python","Humour","Front"],
-        description: "Test 2",
-        upvotes: 2,
-        downvotes: 3,
-        starred: true,
-        owner: "Mathis",
-        vote: Vote.NONE
-    },
-    {
-        id: 2,
-        topics: ["JS","Serieux","Back"],
-        description: "Test 3",
-        upvotes: 7,
-        downvotes: 8,
-        starred: true,
-        owner: "Mathis",
-        vote: Vote.NONE
-    }
-]
+  private anecdotes = new BehaviorSubject<Anecdote[] | null>(null);
 
-  constructor(private router: Router, private authentificationService: AuthentificationService) { }
+  constructor(private route: ActivatedRoute, private authentificationService: AuthentificationService, private anecdotesService : AnecdotesService) { }
   
   ngOnInit(): void {
-    this.user$ = this.authentificationService.user$;
+    this.anecdotes$ = this.anecdotes.asObservable();
+    this.starredFilter = false;
+    this.route.params.subscribe(data => {
+      this.user = data['username'];
+      console.log(this.me + this.user);
+    });
+    this.getAll();
+  }
+
+  showStarred() {
+    if(!this.starredFilter){
+      this.getAllStarred();
+    }else {
+      this.getAll();
+    }
+  }
+
+  getAllStarred() {
+    this.anecdotesService.getStarred(this.user).subscribe(data => {
+      var anecdotesTmp: Anecdote[] = [];
+      data.anecdotes.forEach((e : any) => {
+        var anecdote: Anecdote = {
+          id: e.id,
+          topics: e.topics,
+          description: e.content,
+          upvotes: e.upvotes,
+          downvotes: e.downvotes,
+          starred: e.starred,
+          owner: e.author,
+          vote: e.vote
+        };
+        anecdotesTmp.push(anecdote);
+      });
+      this.anecdotes.next(anecdotesTmp);
+      this.starredFilter = true;
+    })
+  }
+
+  getAll() {
+    this.anecdotesService.getAnecdotesFromUsername(this.user).subscribe(data => {
+      var anecdotesTmp: Anecdote[] = [];
+      data.anecdotes.forEach((e : any) => {
+        var anecdote: Anecdote = {
+          id: e.id,
+          topics: e.topics,
+          description: e.content,
+          upvotes: e.upvotes,
+          downvotes: e.downvotes,
+          starred: e.starred,
+          owner: e.author,
+          vote: e.vote
+        };
+        anecdotesTmp.push(anecdote);
+      });
+        this.anecdotes.next(anecdotesTmp);
+        this.starredFilter = false;
+    })
   }
 
 }

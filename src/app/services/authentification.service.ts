@@ -31,6 +31,10 @@ export class AuthentificationService {
           catchError(this.errorHandler)
         )
     }
+
+    getUser() {
+      return localStorage.getItem("username");
+    }
     
     errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
         let errorMessage = '';

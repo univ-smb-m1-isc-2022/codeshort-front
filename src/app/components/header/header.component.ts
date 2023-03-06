@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToProfil() {
-    this.router.navigateByUrl('home/profil');
+    this.router.navigateByUrl('home/profil/' + this.authentificationService.getUser());
   }
 
   goToHome() {

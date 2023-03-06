@@ -28,7 +28,7 @@
             <ng-template #checkStarred><img src="../../../assets/images/star_checked.svg"/></ng-template>
             <ng-template #notCheckStarred><img src="../../../assets/images/star.svg"/></ng-template>
         </div>
-        <div>
+        <div (click)="goToProfil()">
             <img src="../../../assets/images/user.svg"/>
             {{ anecdote.owner }}
         </div>

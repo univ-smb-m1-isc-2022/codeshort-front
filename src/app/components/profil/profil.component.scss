@@ -27,11 +27,17 @@
 }
 
 .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: solid 1px black;
     color: black;
     width: 10%;
+    height: 20%;
     font-size: 1vw;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .username {
@@ -45,6 +51,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url("../../../assets/images/wave_profil.svg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .anecdotes-list {
@@ -55,4 +66,12 @@
     justify-content: center;
     flex-direction: column;
     border-radius: 20px;
+}
+
+.anecdote {
+    margin-bottom: 25px;
+}
+
+.starred {
+    width: 5%;
 }

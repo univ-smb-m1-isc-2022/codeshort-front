@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { Anecdote } from 'src/models/anecdote.model';
 import { Vote } from 'src/models/vote.model';
@@ -12,7 +13,7 @@ import { Vote } from 'src/models/vote.model';
 export class AnecdoteComponent {
   @Input() anecdote!: Anecdote | null;
 
-  constructor(private anecdotesService: AnecdotesService) { }
+  constructor(private anecdotesService: AnecdotesService, private router : Router) { }
   
   upvoteClicked() {
     if (this.anecdote) {
@@ -59,6 +60,12 @@ export class AnecdoteComponent {
       this.anecdotesService.setVote(this.anecdote.id, this.anecdote.vote, newState).subscribe(data => {
         this.anecdote!.starred = newState;
       });
+    }
+  }
+
+  goToProfil() {
+    if(this.anecdote){
+      this.router.navigateByUrl('home/profil/' + this.anecdote?.owner);
     }
   }
 

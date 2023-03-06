@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HeaderComponent, 
     children:[
       { path: '', component: HomeComponent },
-      { path: 'profil', component: ProfilComponent },
+      { path: 'profil/:username', component: ProfilComponent },
       { path: 'new-anecdote', component: CreateAnecdoteComponent}
     ]
   },
