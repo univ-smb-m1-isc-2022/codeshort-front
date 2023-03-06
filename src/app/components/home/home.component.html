@@ -1,3 +1,6 @@
 <div class="main">
     <app-anecdote [@transition]="anecdoteState" [anecdote]="anecdote$ | async" class="anecdote"></app-anecdote>
+    <button *ngIf="user$ | async" (click)="goToCreateAnecdote()" class="new-anecdote">
+        <img src="../../assets/images/plus.png" alt="+">
+    </button>
 </div>

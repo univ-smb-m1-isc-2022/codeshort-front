@@ -1,7 +1,9 @@
 import { animate, transition, trigger, style, keyframes, state } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { delay, Observable, tap } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
 
 
@@ -37,9 +39,13 @@ export class HomeComponent implements OnInit {
   public static readonly ANIMATION_DURATION = 500;
 
   anecdote$!: Observable<Anecdote | null>;
+  user$!: Observable<String | null>;
   anecdoteState = "inview";
 
-  constructor(private anecdotesService: AnecdotesService) {}
+  constructor(
+    private anecdotesService: AnecdotesService, 
+    private router: Router, 
+    private authentificationService: AuthentificationService) {}
 
   ngOnInit(): void {
     this.anecdotesService.getRandomAnecdotes().subscribe(data => {
@@ -61,6 +67,7 @@ export class HomeComponent implements OnInit {
       });
     });
     this.anecdote$ = this.anecdotesService.anecdote$.pipe();
+    this.user$ = this.authentificationService.user$;
   }
 
   next(): void {
@@ -88,6 +95,10 @@ export class HomeComponent implements OnInit {
         this.anecdoteState = "inview"
       }, 500);
     }
+  }
+
+  goToCreateAnecdote() : void {
+    this.router.navigateByUrl('home/new-anecdote');
   }
 
 }

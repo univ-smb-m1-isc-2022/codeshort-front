@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'home', component: HeaderComponent, 
     children:[
       { path: '', component: HomeComponent },
-      { path: 'profil', component: ProfilComponent }
+      { path: 'profil', component: ProfilComponent },
+      { path: 'new-anecdote', component: CreateAnecdoteComponent}
     ]
   },
   { path: '**', redirectTo: 'home' }

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfilComponent } from './components/profil/profil.component';
+import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     AnecdoteComponent,
     LoginComponent,
     RegisterComponent,
-    ProfilComponent
+    ProfilComponent,
+    CreateAnecdoteComponent
   ],
   imports: [
     BrowserModule,

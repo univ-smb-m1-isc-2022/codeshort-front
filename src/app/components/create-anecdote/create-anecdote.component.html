@@ -1,0 +1,14 @@
+<form #createAnecdoteForm= "ngForm" (ngSubmit)="onSubmitForm(createAnecdoteForm)">
+    <textarea [(ngModel)]="content" id="content" name="content" required>
+        Contenu de l'anecdote
+    </textarea>
+    <select name="topics" id="topics">
+        <option *ngFor="let x of topics" [value]="x" (click)="addToTopics(x)">{{x}}</option>
+    </select>
+    <p *ngFor="let x of selectedTopics" (click)="removeFromTopics(x)">{{x}}</p>
+    <button type="submit" class="connection">Créer</button>
+</form>
+
+<div class="bottom">
+    <button (click)="goToHome()" class="back-login">Retour au fil</button>
+</div>

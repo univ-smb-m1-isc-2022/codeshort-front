@@ -22,7 +22,7 @@ export class AnecdotesService {
     httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
       })
     }
 
@@ -40,6 +40,20 @@ export class AnecdotesService {
         this.anecdotes = anecdotes;
         this.anecdote.next(anecdotes[0]);
       }
+    }
+
+    getAllTopics(): Observable<any> {
+      return this.httpClient.get<any>(environment.apiKey + "/topic", this.httpOptions)
+        .pipe(
+          catchError(this.errorHandler)
+        )
+    }
+
+    createAnecdote(request: any): Observable<any> {
+      return this.httpClient.post<any>(this.apiURL, JSON.stringify(request), this.httpOptions)
+        .pipe(
+          catchError(this.errorHandler)
+        )
     }
 
     next() {
