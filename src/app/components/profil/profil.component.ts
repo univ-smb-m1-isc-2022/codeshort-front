@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
+import { Vote } from 'src/models/vote.model';
 
 @Component({
   selector: 'app-profil',
@@ -20,8 +21,9 @@ export class ProfilComponent implements OnInit {
         description: "Test 1",
         upvotes: 5,
         downvotes: 6,
-        stars: 7,
-        owner: "Mathis"
+        starred: true,
+        owner: "Mathis",
+        vote: Vote.NONE
     },
     {
         id: 1,
@@ -29,8 +31,9 @@ export class ProfilComponent implements OnInit {
         description: "Test 2",
         upvotes: 2,
         downvotes: 3,
-        stars: 4,
-        owner: "Mathis"
+        starred: true,
+        owner: "Mathis",
+        vote: Vote.NONE
     },
     {
         id: 2,
@@ -38,8 +41,9 @@ export class ProfilComponent implements OnInit {
         description: "Test 3",
         upvotes: 7,
         downvotes: 8,
-        stars: 9,
-        owner: "Mathis"
+        starred: true,
+        owner: "Mathis",
+        vote: Vote.NONE
     }
 ]
 

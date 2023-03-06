@@ -15,19 +15,19 @@ import { Anecdote } from 'src/models/anecdote.model';
       state('inview', style({})),
       state('bottom', style({})),
       transition('inview => bottom', [
-        animate('800ms ease-in-out', keyframes([
+        animate('1000ms ease-in-out', keyframes([
           style({ opacity: 1, offset: 0 }),
-          style({ opacity: 0, 'height': '150%', offset: 0.4 }),
-          style({ opacity: 0, 'height': '50%', offset: 0.5 }),
-          style({ 'height': '100%', opacity: 1, offset: 1 }),
+          style({ opacity: 0, offset: 0.4 }),
+          style({ opacity: 0, offset: 0.6 }),
+          style({ opacity: 1, offset: 1 }),
         ]))
       ]),
       transition('inview => top', [
-        animate('800ms ease-in-out', keyframes([
+        animate('1000ms ease-in-out', keyframes([
           style({ opacity: 1, offset: 0 }),
-          style({ opacity: 0, 'height': '50%', offset: 0.4 }),
-          style({ opacity: 0, 'height': '150%', offset: 0.5 }),
-          style({ 'height': '100%', opacity: 1, offset: 1 }),
+          style({ opacity: 0, offset: 0.4 }),
+          style({ opacity: 0, offset: 0.6 }),
+          style({ opacity: 1, offset: 1 }),
         ]))
       ])
     ])]
@@ -36,12 +36,30 @@ import { Anecdote } from 'src/models/anecdote.model';
 export class HomeComponent implements OnInit {
   public static readonly ANIMATION_DURATION = 500;
 
-  anecdote$!: Observable<Anecdote>;
+  anecdote$!: Observable<Anecdote | null>;
   anecdoteState = "inview";
 
   constructor(private anecdotesService: AnecdotesService) {}
 
   ngOnInit(): void {
+    this.anecdotesService.getRandomAnecdotes().subscribe(data => {
+      var anecdotesTmp: Anecdote[] = [];
+      data.anecdotes.forEach((e : any) => {
+        console.log(e);
+        var anecdote: Anecdote = {
+          id: e.id,
+          topics: e.topics,
+          description: e.content,
+          upvotes: e.upvotes,
+          downvotes: e.downvotes,
+          starred: e.starred,
+          owner: e.author,
+          vote: e.vote
+        };
+        anecdotesTmp.push(anecdote);
+        this.anecdotesService.setAnecdotes(anecdotesTmp);
+      });
+    });
     this.anecdote$ = this.anecdotesService.anecdote$.pipe();
   }
 
@@ -57,18 +75,18 @@ export class HomeComponent implements OnInit {
   public onViewportScroll() {
     let wheelEvent: WheelEvent = event as WheelEvent
     if(wheelEvent.deltaY > 0) {
-      this.next()
       this.anecdoteState = "bottom"
       setTimeout(() => {
+        this.next()
         this.anecdoteState = "inview"
-      }, 800);
+      }, 500);
     }
     else if(wheelEvent.deltaY < 0) {
-      this.previous()
       this.anecdoteState = "top"
       setTimeout(() => {
+        this.previous()
         this.anecdoteState = "inview"
-      }, 800);
+      }, 500);
     }
   }
 
