@@ -4,13 +4,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthentificationService {
-    private apiURL = "http://localhost:8080/api/auth";
+    private apiURL = environment.apiKey + "/auth";
 
     httpOptions = {
       headers: new HttpHeaders({
