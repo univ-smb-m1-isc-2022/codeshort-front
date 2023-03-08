@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
+import { TokenInterceptor } from 'src/app/token-interceptor';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent {
   onSubmitForm(form: NgForm) {
     this.authenticationService.register(form.value).subscribe(data => {
       localStorage.setItem('token',data.token);
+      localStorage.setItem('username',form.value.username);
       this.authenticationService.setUser(form.value.username);
       this.router.navigateByUrl('/home');
     });

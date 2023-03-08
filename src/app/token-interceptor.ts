@@ -7,22 +7,22 @@ import { Observable } from "rxjs/internal/Observable";
 })
 export class TokenInterceptor implements HttpInterceptor {
 
-    private readonly token: string | null;
-
-    constructor() {
-        this.token = localStorage.getItem('token');
-    }
-
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.token) {
+        const token = localStorage.getItem("token");
+        if (token) {
             const request_with_token = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.token}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             return next.handle(request_with_token);
         }
-        return next.handle(request);
+        const request_with_headers = request.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        return next.handle(request_with_headers);
     }
 }
