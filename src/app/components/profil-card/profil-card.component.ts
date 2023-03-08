@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
+import { UserService } from 'src/app/services/user.service';
 import { Anecdote } from 'src/models/anecdote.model';
+import { UserProps } from 'src/models/user-props.model';
 
 @Component({
   selector: 'app-profil-card',
@@ -14,12 +16,17 @@ export class ProfilCardComponent implements OnInit {
   anecdotes = new BehaviorSubject<Anecdote[] | null>(null);
   me: string | null = this.authentificationService.getUser();
   starredFilter!: boolean;
+  userProps: UserProps | null = null;
 
-  constructor(private authentificationService: AuthentificationService, private anecdotesService: AnecdotesService) { }
+  constructor(private authentificationService: AuthentificationService, private anecdotesService: AnecdotesService, private userService : UserService) { }
   
   ngOnInit(): void {
     this.starredFilter = false;
     this.getAll();
+    this.userService.getUserProps(this.user).subscribe(data => {
+      console.log(data);
+      this.userProps = data;
+    });
   }
   
   showStarred() {
