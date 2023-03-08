@@ -7,6 +7,7 @@
     </textarea>
     <label>Topics</label>
     <select name="topics" id="topics">
+        <option disabled selected>Sélectionnez un topic</option>
         <option *ngFor="let x of topics" (click)="addToTopics(x)">{{x}}</option>
     </select>
     <p *ngFor="let x of selectedTopics" (click)="removeFromTopics(x)">{{x}}</p>

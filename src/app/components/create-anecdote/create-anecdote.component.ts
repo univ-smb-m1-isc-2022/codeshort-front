@@ -33,7 +33,7 @@ export class CreateAnecdoteComponent implements OnInit {
       content: form.value.content,
       topics: this.selectedTopics 
     }
-    this.anecdotesService.createAnecdote(request).subscribe(data => this.goToHome());
+    if (this.selectedTopics.length != 0) this.anecdotesService.createAnecdote(request).subscribe(data => this.goToHome());
   }
 
   goToHome() : void {
