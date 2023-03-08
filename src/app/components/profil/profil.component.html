@@ -1,23 +1,5 @@
 <div class="main">
-    <div class="band">
-        <img src="../../../assets/images/example.png" class="profil">
-        <p class="username">{{ user }}</p>
-        <div class="utils">
-
-            <div *ngIf="user != me; then showingFollow else notShowingFollow"></div>
-            <ng-template #showingFollow><button class="btn">Follow</button></ng-template>
-            <ng-template #notShowingFollow><div class="btn" style="visibility: hidden"></div></ng-template>
-
-            <button class="btn">GitHub</button>
-
-            <div (click)="showStarred()" class="starred">
-                <div *ngIf="starredFilter; then showingStarred else notShowingStarred"></div>
-                <ng-template #showingStarred><img src="../../../assets/images/star_checked_black.svg"/></ng-template>
-                <ng-template #notShowingStarred><img src="../../../assets/images/star.svg"/></ng-template>
-            </div>
-            
-        </div>
-    </div>
+    <app-profil-card #card [user]="user" />
     <div class="list-container">
         <div class="anecdotes-list">
             <app-anecdote class="anecdote"

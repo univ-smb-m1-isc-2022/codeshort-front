@@ -1,0 +1,48 @@
+.menu {
+    position: fixed;
+    left: 0;
+    margin-top: 50px;
+    width: 10vw;
+    background: rgb(255,255,255,0.8);
+    box-shadow: 1px 1px rgb(200,200,200);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: solid 1px black;
+    color: black;
+    width: 90%;
+    height: 20%;
+    font-size: 1vw;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profil {
+    margin-top: 10px;
+    width: same-as-height;
+    height: 80%;
+    border-radius: 50%;
+}
+
+.icon {
+    width: same-as-height;
+    height: clamp(25px,2vw,50px);
+    margin-bottom: 10px;
+}
+
+.starred {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

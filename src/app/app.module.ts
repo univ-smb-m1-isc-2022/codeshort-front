@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProfilComponent } from './components/profil/profil.component';
 import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
 import { TokenInterceptor } from './token-interceptor';
+import { ProfilCardComponent } from './components/profil-card/profil-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TokenInterceptor } from './token-interceptor';
     LoginComponent,
     RegisterComponent,
     ProfilComponent,
-    CreateAnecdoteComponent
+    CreateAnecdoteComponent,
+    ProfilCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div class="menu">
+    <img src="../../../assets/images/example.png" class="profil">
+    <p class="username">{{ user }}</p>
+
+    <div *ngIf="user != me; then showingFollow else notShowingFollow"></div>
+    <ng-template #showingFollow><button class="btn">Follow</button></ng-template>
+    <ng-template #notShowingFollow><div class="btn" style="visibility: hidden"></div></ng-template>
+
+    <button class="btn">GitHub</button>
+
+    <div (click)="showStarred()" class="starred">
+        <div *ngIf="starredFilter; then showingStarred else notShowingStarred"></div>
+        <ng-template #showingStarred><img class="icon" src="../../../assets/images/star_checked_black.svg"/></ng-template>
+        <ng-template #notShowingStarred><img class="icon" src="../../../assets/images/star.svg"/></ng-template>
+    </div>
+</div>
