@@ -1,12 +1,16 @@
 <div class="menu">
-    <img src="../../../assets/images/example.png" class="profil">
+
+    <div *ngIf="userProps?.profilePictureURI; then showingURI else notShowingURI"></div>
+    <ng-template #showingURI><img [src]="userProps?.profilePictureURI" class="profil"></ng-template>
+    <ng-template #notShowingURI><img src="../../../assets/images/example.png" class="profil"></ng-template>
+
     <p class="username">{{ user }}</p>
 
     <div *ngIf="user != me; then showingFollow else notShowingFollow"></div>
-    <ng-template #showingFollow><button class="btn">Follow</button></ng-template>
+    <ng-template #showingFollow><button (click)="clickFollow()" class="btn">{{ userProps?.followed ? "Unfollow" : "Follow"}}</button></ng-template>
     <ng-template #notShowingFollow><div class="btn" style="visibility: hidden"></div></ng-template>
 
-    <button class="btn">GitHub</button>
+    <button (click)="goToGitHub()" class="btn">GitHub</button>
 
     <div (click)="showStarred()" class="starred">
         <div *ngIf="starredFilter; then showingStarred else notShowingStarred"></div>

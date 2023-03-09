@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 
 @Component({
@@ -31,9 +30,9 @@ export class CreateAnecdoteComponent implements OnInit {
   onSubmitForm(form: NgForm) {
     var request = {
       content: form.value.content,
-      topics: this.selectedTopics 
+      topics: this.selectedTopics
     }
-    if (this.selectedTopics.length != 0) this.anecdotesService.createAnecdote(request).subscribe(data => this.goToHome());
+    if (this.selectedTopics.length != 0) this.anecdotesService.createAnecdote(request).subscribe(() => this.goToHome());
   }
 
   goToHome() : void {

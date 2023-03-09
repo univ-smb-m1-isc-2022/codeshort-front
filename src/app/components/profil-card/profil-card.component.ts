@@ -37,6 +37,19 @@ export class ProfilCardComponent implements OnInit {
     }
   }
 
+  clickFollow() {
+    if (this.userProps) {
+      this.userService.postFollowUser(this.user, this.userProps?.followed).subscribe(data => {
+        console.log(data);
+        this.userProps!.followed = !this.userProps?.followed;
+      });
+    }
+  }
+
+  goToGitHub() {
+    if(this.userProps?.gitURI) window.location.href = this.userProps.gitURI;
+  }
+
   getAllStarred() {
     this.anecdotesService.getStarred(this.user).subscribe(data => {
       var anecdotesTmp: Anecdote[] = [];
