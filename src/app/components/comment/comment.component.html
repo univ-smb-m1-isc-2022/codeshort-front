@@ -1,0 +1,13 @@
+<div class="main">
+    <div class="anecdote-box">
+        <app-anecdote [anecdote]="anecdote$ | async" class="anecdote"></app-anecdote>
+    </div>
+    <div class="box">
+        <div class="comment-list">
+            <app-comment-item class="comment"
+                *ngFor="let comment of comments$ | async" 
+                [comment]="comment"
+            ></app-comment-item>
+        </div>
+    </div>
+</div>

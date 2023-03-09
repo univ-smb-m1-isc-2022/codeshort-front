@@ -15,6 +15,8 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
 import { TokenInterceptor } from './token-interceptor';
 import { ProfilCardComponent } from './components/profil-card/profil-card.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentItemComponent } from './comment-item/comment-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ProfilCardComponent } from './components/profil-card/profil-card.compon
     RegisterComponent,
     ProfilComponent,
     CreateAnecdoteComponent,
-    ProfilCardComponent
+    ProfilCardComponent,
+    CommentComponent,
+    CommentItemComponent
   ],
   imports: [
     BrowserModule,
