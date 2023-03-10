@@ -1,40 +1,48 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Observable, of, Subscription } from "rxjs";
+import { AnecdotesService } from "src/app/services/anecdotes.service";
 import { Anecdote } from "src/models/anecdote.model";
 import { Comment } from "src/models/comment.model";
-import { Vote } from "src/models/vote.model";
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit, OnDestroy {
 
-  anecdote$!: Observable<Anecdote>;
+  anecdote$!: Observable<Anecdote | null>;
   comments$!: Observable<Comment[]>;
+  anecdoteSubscription!: Subscription;
+  content!: String;
+  anecdoteId!: number;
+
+  constructor(private anecdoteService : AnecdotesService) {}
 
   ngOnInit(): void {
-    this.anecdote$ = of({
-      id: 0,
-      topics: ["Javascript"],
-      description: "test",
-      upvotes: 0,
-      downvotes: 0,
-      starred: false,
-      owner: "test",
-      vote: Vote.NONE
+    this.anecdote$ = this.anecdoteService.anecdote$;
+    this.anecdoteSubscription = this.anecdote$.subscribe(data => {
+      if(data){
+        this.anecdoteId = data.id;
+        this.anecdoteService.getAnecdoteComments(this.anecdoteId).subscribe(data => {
+          this.comments$ = of(data.comments);
+        });
+      }
+    });
+  }
+
+  onSubmitForm(form: NgForm) {
+    this.anecdoteService.createComment(form.value, this.anecdoteId).subscribe(() => {
+      this.anecdoteService.getAnecdoteComments(this.anecdoteId).subscribe(data => {
+        this.comments$ = of(data.comments);
+      });
     });
 
-    var comment1: Comment = { content: "hello", author: "Mathis" };
-    this.comments$ = of(
-      [
-        comment1,
-        comment1,
-        comment1,
-        comment1,
-        comment1
-      ]
-    )
   }
+
+  ngOnDestroy(): void {
+    this.anecdoteSubscription.unsubscribe();
+  }
+
 }

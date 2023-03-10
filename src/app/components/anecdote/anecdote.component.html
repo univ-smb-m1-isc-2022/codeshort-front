@@ -1,4 +1,4 @@
-<article *ngIf="anecdote;else case_null" class="anecdote-card">
+<article (click)="goToComment()" *ngIf="anecdote;else case_null" class="anecdote-card">
 
     <div class="topics">
         <div *ngFor="let topic of anecdote.topics" class="topic">
@@ -37,7 +37,7 @@
 </article>
 
 <ng-template #case_null>
-    <article (click)="goToComment()" class="anecdote-card">
+    <article class="anecdote-card">
         <div class="topics">
             <div class="topic">
                 <strong> Topic </strong>

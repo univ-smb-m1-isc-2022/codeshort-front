@@ -56,11 +56,36 @@ export class AnecdotesService {
         )
     }
 
-    createAnecdote(request: any): Observable<any> {
+    createAnecdote(content : string, topics : String[]): Observable<any> {
+
+      var request = {
+        content: content,
+        topics: topics
+      }
+
       return this.httpClient.post<any>(this.apiURL, JSON.stringify(request))
         .pipe(
           catchError(this.errorHandler)
         )
+    }
+
+    getAnecdoteComments(anecdoteId : number) {
+      return this.httpClient.get<any>(this.apiURL + "/" + anecdoteId + "/comment/all")
+        .pipe(
+          catchError(this.errorHandler)
+        )
+    }
+
+    createComment(form : any, anecdoteId : number) {
+      console.log(form);
+      var request = {
+        content : form.content
+      }
+
+      return this.httpClient.post<any>(this.apiURL + "/" + anecdoteId + "/comment", JSON.stringify(request))
+      .pipe(
+        catchError(this.errorHandler)
+      )
     }
 
     next() {

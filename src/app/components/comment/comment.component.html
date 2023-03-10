@@ -4,6 +4,10 @@
     </div>
     <div class="box">
         <div class="comment-list">
+            <form #commentForm= "ngForm" (ngSubmit)="onSubmitForm(commentForm)" class="create-comment-box">
+                <textarea [(ngModel)]="content" type="text" id="content" name="content" placeholder="Commentaire" required ></textarea>
+                <button type="submit" class="reply">Répondre</button>
+            </form>
             <app-comment-item class="comment"
                 *ngFor="let comment of comments$ | async" 
                 [comment]="comment"

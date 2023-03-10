@@ -16,7 +16,7 @@ import { CreateAnecdoteComponent } from './components/create-anecdote/create-ane
 import { TokenInterceptor } from './token-interceptor';
 import { ProfilCardComponent } from './components/profil-card/profil-card.component';
 import { CommentComponent } from './components/comment/comment.component';
-import { CommentItemComponent } from './comment-item/comment-item.component';
+import { CommentItemComponent } from './components/comment-item/comment-item.component';
 
 @NgModule({
   declarations: [

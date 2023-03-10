@@ -72,8 +72,6 @@ export class AnecdoteComponent {
   goToComment() {
     if (this.anecdote) {
       this.router.navigateByUrl('home/comment/' + this.anecdote.id);
-    } else {
-      this.router.navigateByUrl('home/comment/' + 0)
     }
   }
 

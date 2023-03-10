@@ -28,11 +28,7 @@ export class CreateAnecdoteComponent implements OnInit {
   }
 
   onSubmitForm(form: NgForm) {
-    var request = {
-      content: form.value.content,
-      topics: this.selectedTopics
-    }
-    if (this.selectedTopics.length != 0) this.anecdotesService.createAnecdote(request).subscribe(() => this.goToHome());
+    if (this.selectedTopics.length != 0) this.anecdotesService.createAnecdote(form.value.content, this.selectedTopics).subscribe(() => this.goToHome());
   }
 
   goToHome() : void {
