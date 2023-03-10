@@ -4,6 +4,10 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    @media (max-width: 500px) { 
+        grid-template-columns: 1fr;
+    }
 }
 
 .anecdote-box {
@@ -11,6 +15,10 @@
     align-items: center;
     justify-content: center;
     width: 50vw;
+
+    @media (max-width: 500px) { 
+        width: 100vw;
+    }
 }
 
 .comment-list {
@@ -24,6 +32,11 @@
     width: 50vw;
     height: 100%;
     overflow-y: scroll;
+
+    @media (max-width: 500px) { 
+        width: 100vw;
+        overflow-y: none;
+    }
 }
 
 .comment {
