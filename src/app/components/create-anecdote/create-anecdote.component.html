@@ -6,9 +6,9 @@
     <textarea [(ngModel)]="content" id="content" name="content" required>
     </textarea>
     <label>Topics</label>
-    <select name="topics" id="topics">
+    <select [(ngModel)]="selectedTopic" (change)="addToTopics()" id="topics" name="topics">
         <option disabled selected>Sélectionnez un topic</option>
-        <option *ngFor="let x of topics" (click)="addToTopics(x)">{{x}}</option>
+        <option *ngFor="let topic of topics" value="{{topic}}">{{topic}}</option>
     </select>
     <p *ngFor="let x of selectedTopics" (click)="removeFromTopics(x)">{{x}}</p>
     <button id="main-button" type="submit">Créer</button>

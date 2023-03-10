@@ -13,6 +13,7 @@ export class CreateAnecdoteComponent implements OnInit {
   topics: String[] = [];
   selectedTopics: String[] = [];
   content!: String;
+  selectedTopic!: String;
 
   constructor(
     private anecdotesService: AnecdotesService,
@@ -35,8 +36,11 @@ export class CreateAnecdoteComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
-  addToTopics(topic: String) : void {
-    this.selectedTopics.push(topic)
+  addToTopics() : void {
+    var topic = this.topics.filter(
+      (item) => item === this.selectedTopic
+    );
+     if(!this.selectedTopics.includes(topic[0])) this.selectedTopics.push(topic[0]);
   }
 
   removeFromTopics(topic: String): void{
