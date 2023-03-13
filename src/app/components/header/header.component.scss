@@ -34,6 +34,7 @@
     height: 100%;
     width: 20vw;
     text-align: center;
+    font-size: clamp(4px, 3vw, 20px);
 }
 
 .recherche {
