@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environment/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthentificationService {
     private user = new BehaviorSubject<String | null>(localStorage.getItem("username"));
     user$ = this.user.asObservable();
   
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private router: Router) { }
   
     login(form : any): Observable<any> {
         return this.httpClient.post<any>(this.apiURL + '/authenticate', JSON.stringify(form))
@@ -34,6 +35,11 @@ export class AuthentificationService {
 
     getUser() {
       return localStorage.getItem("username");
+    }
+
+    logout() {
+      localStorage.clear();
+      this.router.navigateByUrl('login');
     }
     
     errorHandler(error: { error: { message: string; }; status: any; message: any; }) {

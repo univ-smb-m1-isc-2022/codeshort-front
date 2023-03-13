@@ -13,10 +13,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProfilComponent } from './components/profil/profil.component';
 import { CreateAnecdoteComponent } from './components/create-anecdote/create-anecdote.component';
-import { TokenInterceptor } from './token-interceptor';
+import { TokenInterceptor } from './interceptors/token-interceptor';
 import { ProfilCardComponent } from './components/profil-card/profil-card.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentItemComponent } from './components/comment-item/comment-item.component';
+import { ExpiredTokenInterceptor } from './interceptors/expired-token-interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CommentItemComponent } from './components/comment-item/comment-item.com
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ExpiredTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

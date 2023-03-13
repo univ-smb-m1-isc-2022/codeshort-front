@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
-import { TokenInterceptor } from 'src/app/token-interceptor';
 
 @Component({
   selector: 'app-register',
