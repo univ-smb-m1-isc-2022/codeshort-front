@@ -18,6 +18,7 @@ import { ProfilCardComponent } from './components/profil-card/profil-card.compon
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentItemComponent } from './components/comment-item/comment-item.component';
 import { ExpiredTokenInterceptor } from './interceptors/expired-token-interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ExpiredTokenInterceptor } from './interceptors/expired-token-intercepto
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [

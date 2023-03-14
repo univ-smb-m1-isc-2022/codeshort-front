@@ -4,13 +4,13 @@
             <strong>CodeShort</strong>
         </div>
 
-        <form #registerForm= "ngForm" (ngSubmit)="onSubmitForm(registerForm)">
-            <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="Pseudonyme" required>
-            <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="Mail" required>
-            <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
-            <input [(ngModel)]="userConfirmPassword" type="password" id="userConfirmPassword" name="userConfirmPassword" placeholder="Confirmer mot de passe" required>
-            <input [(ngModel)]="userGitHub" type="url" id="userGitHub" name="userGitHub" placeholder="URL GitHub (optionnel)">
-            <button type="submit" class="connection">Inscription</button>
+        <form [formGroup]="userRegister" (ngSubmit)="onSubmitForm()">
+            <input formControlName="username" [class.is-invalid] = "userRegister.get('username')?.invalid && userRegister.get('username')?.touched" type="text" id="username" name="username" placeholder="Pseudonyme" required>
+            <input formControlName="email" type="email" id="email" name="email" placeholder="Mail" required>
+            <input formControlName="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <input formControlName="userConfirmPassword" type="password" id="userConfirmPassword" name="userConfirmPassword" placeholder="Confirmer mot de passe" required>
+            <input formControlName="userGitHub" type="url" id="userGitHub" name="userGitHub" placeholder="URL GitHub (optionnel)">
+            <button [disabled]="!userRegister.valid" type="submit" class="connection">Inscription</button>
         </form>
 
         <div class="bottom">

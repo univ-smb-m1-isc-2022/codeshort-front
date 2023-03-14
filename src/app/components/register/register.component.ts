@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,21 +10,38 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  username!: String;
-  email!: String;
-  password!: String;
-  userConfirmPassword!: String;
-  userGitHub!: String;
+  userRegister = new FormGroup({
+    username: new FormControl(
+      '', [Validators.required, Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$")]
+    ),
+    email: new FormControl(
+      '', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
+    ),
+    password: new FormControl(
+      '', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[a-z]).{8,}$")]
+    ),
+    userConfirmPassword: new FormControl(''),
+    userGitHub: new FormControl(
+      '',[Validators.pattern("^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$")] 
+    )
+  }, {validators: this.passwordConfirming})
 
   constructor(private router: Router, private authenticationService: AuthentificationService) { }
 
-  onSubmitForm(form: NgForm) {
-    this.authenticationService.register(form.value).subscribe(data => {
-      localStorage.setItem('token',data.token);
-      localStorage.setItem('username',form.value.username);
-      this.authenticationService.setUser(form.value.username);
-      this.router.navigateByUrl('/home');
-    });
+  onSubmitForm() {
+    this.authenticationService.register(this.userRegister.value).subscribe(data => {
+      var username = this.userRegister.get('username')!.value;
+        localStorage.setItem('token',data.token);
+        localStorage.setItem('username',username!);
+        this.authenticationService.setUser(username!);
+        this.router.navigateByUrl('/home');
+      });
+  }
+
+  passwordConfirming(c: AbstractControl): any {
+    if (c.get('password')?.value !== c.get('userConfirmPassword')?.value) {
+      return { invalid: true }
+    }
   }
 
   goToLogin() : void {
