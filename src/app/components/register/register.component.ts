@@ -22,7 +22,7 @@ export class RegisterComponent {
     ),
     userConfirmPassword: new FormControl(''),
     userGitHub: new FormControl(
-      '',[Validators.pattern("^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$")] 
+      '',[Validators.pattern("^(https:\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$")] 
     )
   }, {validators: this.passwordConfirming})
 
@@ -46,5 +46,21 @@ export class RegisterComponent {
 
   goToLogin() : void {
     this.router.navigateByUrl('login');
+  }
+
+  get usernameField(){
+    return this.userRegister.get('username')
+  }
+
+  get emailField(){
+    return this.userRegister.get('email')
+  }
+
+  get passwordField(){
+    return this.userRegister.get('password')
+  }
+
+  get gitHubURLField(){
+    return this.userRegister.get('userGitHub')
   }
 }
