@@ -102,7 +102,6 @@ export class ProfilCardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // TODO modifier image de profil dans le back
       if(result != null)
         this.sendFile(result)
     });
