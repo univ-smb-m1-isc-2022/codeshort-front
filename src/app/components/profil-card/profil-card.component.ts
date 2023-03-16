@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { UserService } from 'src/app/services/user.service';
 import { Anecdote } from 'src/models/anecdote.model';
 import { UserProps } from 'src/models/user-props.model';
+import { DialogEditProfilComponent } from '../dialog-edit-profil/dialog-edit-profil.component';
 
 @Component({
   selector: 'app-profil-card',
@@ -18,7 +20,10 @@ export class ProfilCardComponent implements OnInit {
   starredFilter!: boolean;
   userProps: UserProps | null = null;
 
-  constructor(private authentificationService: AuthentificationService, private anecdotesService: AnecdotesService, private userService : UserService) { }
+  constructor(private authentificationService: AuthentificationService, 
+    private anecdotesService: AnecdotesService, 
+    private userService : UserService,
+    public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.starredFilter = false;
@@ -90,5 +95,24 @@ export class ProfilCardComponent implements OnInit {
         this.anecdotes.next(anecdotesTmp);
         this.starredFilter = false;
     })
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogEditProfilComponent, {
+      width: '40%',
+      data: {name: this.me, picture: this.userProps?.profilePictureURI}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO modifier image de profil dans le back
+      if(result != null)
+        this.sendFile(result)
+    });
+  }
+
+  sendFile(file: any) {
+    this.userService.postChangePicture(file).subscribe((data: any) => {
+          console.log(data);
+      });
   }
 }

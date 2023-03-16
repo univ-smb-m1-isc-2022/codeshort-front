@@ -9,7 +9,15 @@ export class TokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = localStorage.getItem("token");
-        if (token) {
+        if(request.url.includes("/api/user/picture")) {
+            const request_with_token = request.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(request)
+            return next.handle(request_with_token);
+        } else if (token) {
             const request_with_token = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',

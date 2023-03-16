@@ -12,6 +12,8 @@
 
     <button (click)="goToGitHub()" class="btn">GitHub</button>
 
+    <button (click)="openDialog()" class="btn">Editer le profil</button>
+
     <div (click)="showStarred()" class="starred">
         <div *ngIf="starredFilter; then showingStarred else notShowingStarred"></div>
         <ng-template #showingStarred><img class="icon" src="../../../assets/images/star_checked_black.svg"/></ng-template>

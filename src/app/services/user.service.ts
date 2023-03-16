@@ -4,7 +4,6 @@ import { Observable } from "rxjs/internal/Observable";
 import { throwError } from "rxjs/internal/observable/throwError";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { environment } from "src/environment/environment";
-import { UserProps } from "src/models/user-props.model";
 
 @Injectable({
     providedIn: 'root'
@@ -23,17 +22,26 @@ export class UserService {
     }
   
     postFollowUser(username: string, follow : boolean ) {
-        if (follow) {
-            return this.httpClient.post<any>(this.apiURL + '/user/unfollow/' + username, JSON.stringify({}))
-            .pipe(
-              catchError(this.errorHandler)
-            )
-        } else {
-            return this.httpClient.post<any>(this.apiURL + '/user/follow/' + username, JSON.stringify({}))
-            .pipe(
-              catchError(this.errorHandler)
-            )
-        }
+      if (follow) {
+          return this.httpClient.post<any>(this.apiURL + '/user/unfollow/' + username, JSON.stringify({}))
+          .pipe(
+            catchError(this.errorHandler)
+          )
+      } else {
+          return this.httpClient.post<any>(this.apiURL + '/user/follow/' + username, JSON.stringify({}))
+          .pipe(
+            catchError(this.errorHandler)
+          )
+      }
+    }
+
+    postChangePicture(file: any) {
+        var formData = new FormData();
+        formData.append("file", file);
+        return this.httpClient.post<any>(this.apiURL + '/user/picture' , formData)
+        .pipe(
+          catchError(this.errorHandler)
+        )
     }
 
     errorHandler(error: { error: { message: string; }; status: any; message: any; }) {

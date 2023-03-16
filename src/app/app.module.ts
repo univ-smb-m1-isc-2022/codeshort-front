@@ -17,6 +17,8 @@ import { TokenInterceptor } from './token-interceptor';
 import { ProfilCardComponent } from './components/profil-card/profil-card.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentItemComponent } from './components/comment-item/comment-item.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogEditProfilComponent } from './components/dialog-edit-profil/dialog-edit-profil.component'; 
 
 @NgModule({
   declarations: [
@@ -30,14 +32,16 @@ import { CommentItemComponent } from './components/comment-item/comment-item.com
     CreateAnecdoteComponent,
     ProfilCardComponent,
     CommentComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    DialogEditProfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
