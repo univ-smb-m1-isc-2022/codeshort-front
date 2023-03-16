@@ -4,13 +4,31 @@
             <strong>CodeShort</strong>
         </div>
 
-        <form #registerForm= "ngForm" (ngSubmit)="onSubmitForm(registerForm)">
-            <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="Pseudonyme" required>
-            <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="Mail" required>
-            <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
-            <input [(ngModel)]="userConfirmPassword" type="password" id="userConfirmPassword" name="userConfirmPassword" placeholder="Confirmer mot de passe" required>
-            <input [(ngModel)]="userGitHub" type="url" id="userGitHub" name="userGitHub" placeholder="URL GitHub (optionnel)">
-            <button type="submit" class="connection">Inscription</button>
+        <form [formGroup]="userRegister" (ngSubmit)="onSubmitForm()">
+
+            <div *ngIf="(usernameField!.invalid && usernameField!.touched) || usernameField!.dirty">
+                <div *ngIf="usernameField?.errors?.['pattern']">Le Pseudonyme doit contenir au moins 8 caractères.</div>
+            </div>
+            <input formControlName="username" [class.is-invalid] = "usernameField?.errors" type="text" id="username" name="username" placeholder="Pseudonyme" required>
+            
+            <div *ngIf="(emailField!.invalid && emailField!.touched) || emailField!.dirty">
+                <div *ngIf="emailField?.errors?.['pattern']">Le mail doit être valide.</div>
+            </div>
+            <input formControlName="email" type="email" id="email" name="email" placeholder="Mail" required>
+
+            <div *ngIf="(passwordField!.invalid && passwordField!.touched) || passwordField!.dirty">
+                <div *ngIf="passwordField?.errors?.['pattern']">Le mot de passe doit contenir au moins 1 chiffre, 1 minuscule et 8 caractères.</div>
+            </div>
+            <input formControlName="password" type="password" id="password" name="password" placeholder="Mot de passe" required>
+            
+            <input formControlName="userConfirmPassword" type="password" id="userConfirmPassword" name="userConfirmPassword" placeholder="Confirmer mot de passe" required>
+            
+            <div *ngIf="(gitHubURLField!.invalid && gitHubURLField!.touched) || gitHubURLField!.dirty">
+                <div *ngIf="gitHubURLField?.errors?.['pattern']">L'URL GitHub doit être correcte.</div>
+            </div>
+            <input formControlName="userGitHub" type="url" id="userGitHub" name="userGitHub" placeholder="URL GitHub (optionnel)">
+            
+            <button [disabled]="!userRegister.valid" type="submit" class="connection">Inscription</button>
         </form>
 
         <div class="bottom">

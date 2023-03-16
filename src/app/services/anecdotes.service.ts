@@ -42,6 +42,18 @@ export class AnecdotesService {
         )
     }
 
+    getAllFromTopics(topics : String[]): Observable<any> {
+
+      var request = {
+        topics : topics
+      }
+
+      return this.httpClient.post<any>(this.apiURL + "/topics", JSON.stringify(request))
+        .pipe(
+          catchError(this.errorHandler)
+        )
+    }
+
     getStarred(username : string): Observable<any> {
       return this.httpClient.get<any>(this.apiURL + "/starred/" + username)
         .pipe(

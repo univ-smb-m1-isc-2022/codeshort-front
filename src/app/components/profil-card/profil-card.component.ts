@@ -29,7 +29,6 @@ export class ProfilCardComponent implements OnInit {
     this.starredFilter = false;
     this.getAll();
     this.userService.getUserProps(this.user).subscribe(data => {
-      console.log(data);
       this.userProps = data;
     });
   }
@@ -45,7 +44,6 @@ export class ProfilCardComponent implements OnInit {
   clickFollow() {
     if (this.userProps) {
       this.userService.postFollowUser(this.user, this.userProps?.followed).subscribe(data => {
-        console.log(data);
         this.userProps!.followed = !this.userProps?.followed;
       });
     }
