@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environment/environment';
 import { Anecdote } from 'src/models/anecdote.model';
 import { UserProps } from 'src/models/user-props.model';
 import { DialogEditProfilComponent } from '../dialog-edit-profil/dialog-edit-profil.component';
@@ -29,6 +30,7 @@ export class ProfilCardComponent implements OnInit {
     this.starredFilter = false;
     this.getAll();
     this.userService.getUserProps(this.user).subscribe(data => {
+      data.profilePictureURI = environment.serverKey + "/images/" + data.profilePictureURI;
       this.userProps = data;
     });
   }
@@ -109,7 +111,7 @@ export class ProfilCardComponent implements OnInit {
 
   sendFile(file: any) {
     this.userService.postChangePicture(file).subscribe((data: any) => {
-          console.log(data);
-      });
+      localStorage.setItem('pictureUri', environment.serverKey + "/images/" + data.response)
+    });
   }
 }

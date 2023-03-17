@@ -15,7 +15,9 @@ export class AuthentificationService {
     private apiURL = environment.apiKey + "/auth";
 
     private user = new BehaviorSubject<String | null>(localStorage.getItem("username"));
+    private profilePictureUri = new BehaviorSubject<String | null>(localStorage.getItem("pictureUri"));
     user$ = this.user.asObservable();
+    profilePictureUri$ = this.profilePictureUri.asObservable();
   
     constructor(private httpClient: HttpClient, private router: Router) { }
   

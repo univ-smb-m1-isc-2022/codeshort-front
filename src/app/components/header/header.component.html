@@ -17,7 +17,7 @@
     </ul>
     <ul *ngIf="user$ | async; else elseBlock">
         <li (click)="goToProfil()" class="profil">
-            <img src="../../../assets/images/example.png" class="profil">
+            <img src="{{pictureUri$ | async}}" class="profil">
             {{ user$ | async }}
         </li>
     </ul>
