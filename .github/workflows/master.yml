@@ -23,13 +23,14 @@ jobs:
       - name: Install NPM Modules
         run: npm install
 
-      - name: Build Project
-        run: npm run build --prod
+      - name: Build Docker image
+        run: docker build -t codeshort-front .
 
-      - name: Push to GitHub Packages of organization
+      - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: univ-smb-m1-isc-2022/codeshort-front/master
+          tags: latest
