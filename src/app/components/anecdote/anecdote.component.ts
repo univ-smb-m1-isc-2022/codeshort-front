@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { Anecdote } from 'src/models/anecdote.model';
 import { Vote } from 'src/models/vote.model';
+import { DialogReportComponent } from '../dialog-report/dialog-report.component';
 
 @Component({
   selector: 'app-anecdote',
@@ -13,7 +15,7 @@ import { Vote } from 'src/models/vote.model';
 export class AnecdoteComponent {
   @Input() anecdote!: Anecdote | null;
 
-  constructor(private anecdotesService: AnecdotesService, private router : Router) { }
+  constructor(private anecdotesService: AnecdotesService, private router : Router, public dialog: MatDialog) { }
   
   upvoteClicked() {
     if (this.anecdote) {
@@ -73,6 +75,19 @@ export class AnecdoteComponent {
     if (this.anecdote) {
       this.router.navigateByUrl('home/comment/' + this.anecdote.id);
     }
+  }
+
+  report() {
+    const dialogRef = this.dialog.open(DialogReportComponent, {
+      width: '40%',
+      data: {anecdote: this.anecdote?.id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != null && this.anecdote){
+        this.anecdotesService.reportAnecdote(this.anecdote.id, result);
+      }
+    });
   }
 
 }

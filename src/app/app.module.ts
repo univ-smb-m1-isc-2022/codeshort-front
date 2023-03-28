@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogEditProfilComponent } from './components/dialog-edit-profil/dialog-edit-profil.component'; 
 import { ExpiredTokenInterceptor } from './interceptors/expired-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DialogReportComponent } from './components/dialog-report/dialog-report.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfilCardComponent,
     CommentComponent,
     CommentItemComponent,
-    DialogEditProfilComponent
+    DialogEditProfilComponent,
+    DialogReportComponent
   ],
   imports: [
     BrowserModule,

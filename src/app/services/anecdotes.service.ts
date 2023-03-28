@@ -81,6 +81,17 @@ export class AnecdotesService {
         )
     }
 
+    reportAnecdote(anecdoteId : number, content : string) {
+      var request = {
+        content: content,
+      }
+
+      return this.httpClient.post<any>(this.apiURL + "/" + anecdoteId + "/report", JSON.stringify(request))
+        .pipe(
+          catchError(this.errorHandler)
+        )
+    }
+
     getAnecdoteComments(anecdoteId : number) {
       return this.httpClient.get<any>(this.apiURL + "/" + anecdoteId + "/comment/all")
         .pipe(

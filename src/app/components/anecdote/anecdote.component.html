@@ -1,12 +1,12 @@
-<article (click)="goToComment()" *ngIf="anecdote;else case_null" class="anecdote-card">
+<article *ngIf="anecdote;else case_null" class="anecdote-card">
 
-    <div class="topics">
+    <div (click)="goToComment()" class="topics">
         <div *ngFor="let topic of anecdote.topics" class="topic">
             <strong> {{ topic }} </strong>
         </div>
     </div>
 
-    <div class="description">
+    <div (click)="goToComment()" class="description">
         {{ anecdote.description }}
     </div>
 
@@ -32,6 +32,7 @@
             <img src="../../../assets/images/user.svg"/>
             {{ anecdote.owner }}
         </div>
+        <div (click)="report()"><img class="warning" src="../../../assets/images/warning.svg"/></div>
     </div>
 
 </article>
