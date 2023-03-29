@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   user$!: Observable<String | null>;
   anecdoteState = "inview";
   canRoll = true;
+  filter: "aléatoire" | "populaire" = "aléatoire";
 
   constructor(
     private anecdotesService: AnecdotesService, 
@@ -49,23 +50,7 @@ export class HomeComponent implements OnInit {
     private authentificationService: AuthentificationService) {}
 
   ngOnInit(): void {
-    this.anecdotesService.getRandomAnecdotes().subscribe(data => {
-      var anecdotesTmp: Anecdote[] = [];
-      data.anecdotes.forEach((e : any) => {
-        var anecdote: Anecdote = {
-          id: e.id,
-          topics: e.topics,
-          description: e.content,
-          upvotes: e.upvotes,
-          downvotes: e.downvotes,
-          starred: e.starred,
-          owner: e.author,
-          vote: e.vote
-        };
-        anecdotesTmp.push(anecdote);
-      });
-      this.anecdotesService.setAnecdotes(anecdotesTmp);
-    });
+    this.getRandomAnecdotes();
     this.anecdote$ = this.anecdotesService.anecdote$.pipe();
     this.user$ = this.authentificationService.user$;
   }
@@ -105,6 +90,59 @@ export class HomeComponent implements OnInit {
 
   goToCreateAnecdote() : void {
     this.router.navigateByUrl('home/new-anecdote');
+  }
+
+  changeFilter() {
+    if(this.filter == "aléatoire") {
+      this.filter = "populaire";
+      this.getPopularAnecdotes();
+
+    }else {
+      this.filter = "aléatoire";
+      this.getRandomAnecdotes();
+    }
+  }
+
+  getRandomAnecdotes() {
+    this.anecdotesService.getRandomAnecdotes().subscribe(data => {
+      console.log(data);
+      var anecdotesTmp: Anecdote[] = [];
+      data.anecdotes.forEach((e : any) => {
+        var anecdote: Anecdote = {
+          id: e.id,
+          topics: e.topics,
+          description: e.content,
+          upvotes: e.upvotes,
+          downvotes: e.downvotes,
+          starred: e.starred,
+          owner: e.author,
+          vote: e.vote
+        };
+        anecdotesTmp.push(anecdote);
+      });
+      this.anecdotesService.setAnecdotes(anecdotesTmp);
+    });
+  }
+
+  getPopularAnecdotes() {
+    this.anecdotesService.getPopularAnecdotes().subscribe(data => {
+      console.log(data);
+      var anecdotesTmp: Anecdote[] = [];
+      data.anecdotes.forEach((e : any) => {
+        var anecdote: Anecdote = {
+          id: e.id,
+          topics: e.topics,
+          description: e.content,
+          upvotes: e.upvotes,
+          downvotes: e.downvotes,
+          starred: e.starred,
+          owner: e.author,
+          vote: e.vote
+        };
+        anecdotesTmp.push(anecdote);
+      });
+      this.anecdotesService.setAnecdotes(anecdotesTmp);
+    });
   }
 
 }

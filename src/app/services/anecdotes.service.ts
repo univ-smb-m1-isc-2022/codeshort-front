@@ -28,6 +28,13 @@ export class AnecdotesService {
         )
     }
   
+    getPopularAnecdotes(): Observable<any> {
+      return this.httpClient.get<any>(this.apiURL + "/popular")
+      .pipe(
+        catchError(this.errorHandler)
+      )
+    }
+
     setAnecdotes(anecdotes: Anecdote[]) {
       if (anecdotes.length != 0) {
         this.anecdotes = anecdotes;

@@ -3,4 +3,7 @@
     <button *ngIf="user$ | async" (click)="goToCreateAnecdote()" class="new-anecdote">
         <img src="../../assets/images/plus.png" alt="+">
     </button>
+    <button *ngIf="user$ | async" (click)="changeFilter()" class="switch">
+        {{ filter }}
+    </button>
 </div>
