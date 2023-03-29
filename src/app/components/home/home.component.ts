@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getRandomAnecdotes();
     this.anecdote$ = this.anecdotesService.anecdote$.pipe();
-    this.user$ = this.authentificationService.user$;
+    this.user$ = this.authentificationService.user$;    
   }
 
   next(): void {
@@ -105,7 +105,6 @@ export class HomeComponent implements OnInit {
 
   getRandomAnecdotes() {
     this.anecdotesService.getRandomAnecdotes().subscribe(data => {
-      console.log(data);
       var anecdotesTmp: Anecdote[] = [];
       data.anecdotes.forEach((e : any) => {
         var anecdote: Anecdote = {
@@ -126,7 +125,6 @@ export class HomeComponent implements OnInit {
 
   getPopularAnecdotes() {
     this.anecdotesService.getPopularAnecdotes().subscribe(data => {
-      console.log(data);
       var anecdotesTmp: Anecdote[] = [];
       data.anecdotes.forEach((e : any) => {
         var anecdote: Anecdote = {

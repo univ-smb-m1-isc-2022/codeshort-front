@@ -1,0 +1,20 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: solid 1px black;
+    color: black;
+    width: 90%;
+    height: 20%;
+    font-size: clamp(4px, 3vw, 20px);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.edit-report{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

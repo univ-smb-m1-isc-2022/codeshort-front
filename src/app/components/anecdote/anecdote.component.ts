@@ -45,7 +45,6 @@ export class AnecdoteComponent {
         });
       } else {
         this.anecdotesService.setVote(this.anecdote.id, Vote.DOWNVOTE, this.anecdote.starred).subscribe(data => {
-          console.log(this.anecdote?.vote);
           if (this.anecdote!.vote == Vote.UPVOTE) {
             this.anecdote!.upvotes -= 1;
           }

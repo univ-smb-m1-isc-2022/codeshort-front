@@ -107,7 +107,6 @@ export class AnecdotesService {
     }
 
     createComment(form : any, anecdoteId : number) {
-      console.log(form);
       var request = {
         content : form.content
       }

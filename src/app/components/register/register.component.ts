@@ -3,6 +3,9 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogFavoriteTopicsComponent } from '../dialog-favorite-topics/dialog-favorite-topics.component';
 
 @Component({
   selector: 'app-register',
@@ -26,16 +29,35 @@ export class RegisterComponent {
     )
   }, {validators: this.passwordConfirming})
 
-  constructor(private router: Router, private authenticationService: AuthentificationService) { }
+  constructor(
+    private router: Router, 
+    private authenticationService: AuthentificationService,
+    private userService: UserService,
+    public dialog: MatDialog
+  ) { }
 
   onSubmitForm() {
     this.authenticationService.register(this.userRegister.value).subscribe(data => {
       var username = this.userRegister.get('username')!.value;
-        localStorage.setItem('token',data.token);
-        localStorage.setItem('username',username!);
-        this.authenticationService.setUser(username!);
-        this.router.navigateByUrl('/home');
+      localStorage.setItem('token',data.token);
+      localStorage.setItem('username',username!);
+      this.authenticationService.setUser(username!);
+
+      const dialogRef = this.dialog.open(DialogFavoriteTopicsComponent, {
+        width: '40%',
+        disableClose: true
       });
+      
+      dialogRef.afterClosed().subscribe((result) => {
+        if(result != null){
+          this.userService.postFavoritesTopics(result);
+        }else{
+          this.userService.postFavoritesTopics(["Javascript", "Typescript", "Java"]);
+        }
+      })
+
+      this.router.navigateByUrl('/home');
+    });
   }
 
   passwordConfirming(c: AbstractControl): any {

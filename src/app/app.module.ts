@@ -22,6 +22,7 @@ import { DialogEditProfilComponent } from './components/dialog-edit-profil/dialo
 import { ExpiredTokenInterceptor } from './interceptors/expired-token-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogReportComponent } from './components/dialog-report/dialog-report.component';
+import { DialogFavoriteTopicsComponent } from './components/dialog-favorite-topics/dialog-favorite-topics.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DialogReportComponent } from './components/dialog-report/dialog-report.
     CommentComponent,
     CommentItemComponent,
     DialogEditProfilComponent,
-    DialogReportComponent
+    DialogReportComponent,
+    DialogFavoriteTopicsComponent
   ],
   imports: [
     BrowserModule,

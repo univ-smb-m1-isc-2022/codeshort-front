@@ -1,0 +1,10 @@
+<div class="edit-report">
+    <h1>Topics Favoris</h1>
+    
+    <select [(ngModel)]="selectedTopic" (change)="addToTopics()" id="topics" name="topics">
+        <option disabled selected>Sélectionnez un topic</option>
+        <option *ngFor="let topic of topics" value="{{topic}}">{{topic}}</option>
+    </select>
+    <p *ngFor="let x of selectedTopics" (click)="removeFromTopics(x)">{{x}}</p>
+    <button class="btn" (click)="closeDialog(selectedTopics)">Valider</button>
+</div>

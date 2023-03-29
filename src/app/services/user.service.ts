@@ -44,6 +44,18 @@ export class UserService {
         )
     }
 
+    postFavoritesTopics(topics: string[]) {
+
+      var request = {
+        topics: topics,
+      }
+
+      return this.httpClient.post<any>(this.apiURL + '/user/topics', JSON.stringify(request))
+      .pipe(
+        catchError(this.errorHandler)
+      )
+    }
+
     errorHandler(error: { error: { message: string; }; status: any; message: any; }) {
         let errorMessage = '';
         if(error.error instanceof ErrorEvent) {
