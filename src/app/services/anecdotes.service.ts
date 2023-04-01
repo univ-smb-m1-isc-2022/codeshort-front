@@ -130,11 +130,14 @@ export class AnecdotesService {
     }
   
     setVote(anecdoteId: number, vote: Vote, starred: boolean) {
-
       let route = this.apiURL + "/" + anecdoteId + "/rating";
-
       let request = JSON.stringify({ vote: vote, starred: starred });
+      return this.httpClient.post<any>( route, request).pipe( catchError(this.errorHandler))  
+    }
 
+    setVoteComment(anecdoteId : number, commentId: number, vote: Vote) {
+      let route = this.apiURL + "/" + anecdoteId + "/comment/" + commentId + "/rating";
+      let request = JSON.stringify({ vote: vote});
       return this.httpClient.post<any>( route, request).pipe( catchError(this.errorHandler))  
     }
 

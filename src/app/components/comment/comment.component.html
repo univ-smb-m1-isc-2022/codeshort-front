@@ -11,6 +11,7 @@
             <app-comment-item class="comment"
                 *ngFor="let comment of comments$ | async" 
                 [comment]="comment"
+                [anecdoteId]="anecdoteId"
             ></app-comment-item>
         </div>
     </div>

@@ -1,7 +1,21 @@
 <div class="main">
     <p class="text">{{ comment.content }}</p>
-    <div (click)="goToProfil()" class="user">
-        <img class="icon" src="../../../assets/images/user.svg"/>
-        Mathis
+    <div class="interactions">
+        <div (click)="upvoteClicked()" >
+            <div *ngIf="comment.vote == 'UPVOTE'; then checkUpvote else notCheckUpvote"></div>
+            <ng-template #checkUpvote><img src="../../../assets/images/upvote_checked.svg"/></ng-template>
+            <ng-template #notCheckUpvote><img src="../../../assets/images/upvote.svg"/></ng-template>
+            {{ comment.upvotes }}
+        </div>
+        <div (click)="downvoteClicked()">
+            <div *ngIf="comment.vote == 'DOWNVOTE'; then checkDownvote else notCheckDownvote"></div>
+            <ng-template #checkDownvote><img src="../../../assets/images/downvote_checked.svg"/></ng-template>
+            <ng-template #notCheckDownvote><img src="../../../assets/images/downvote.svg"/></ng-template>
+            {{ comment.downvotes }}
+        </div>  
+        <div (click)="goToProfil()" class="user">
+            <img class="icon" src="../../../assets/images/user.svg"/>
+            Mathis
+        </div>
     </div>
 </div>
