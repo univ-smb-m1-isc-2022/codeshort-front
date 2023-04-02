@@ -30,7 +30,8 @@ export class ProfilCardComponent implements OnInit {
     this.starredFilter = false;
     this.getAll();
     this.userService.getUserProps(this.user).subscribe(data => {
-      data.profilePictureURI = environment.serverKey + "/images/" + data.profilePictureURI;
+      if(data.profilePictureURI)
+        data.profilePictureURI = environment.serverKey + "/images/" + data.profilePictureURI;
       this.userProps = data;
     });
   }
@@ -111,7 +112,8 @@ export class ProfilCardComponent implements OnInit {
 
   sendFile(file: any) {
     this.userService.postChangePicture(file).subscribe((data: any) => {
-      localStorage.setItem('pictureUri', environment.serverKey + "/images/" + data.response)
+      this.authentificationService.setLinkPicture(data.response);
+      this.userProps!.profilePictureURI = this.authentificationService.getLinkPicture();
     });
   }
 }

@@ -1,5 +1,5 @@
 export class UserProps {
-    profilePictureURI!: string;
+    profilePictureURI!: string | null;
     gitURI!: string;
     followed!: boolean;
 }

@@ -15,9 +15,10 @@ export class AuthentificationService {
     private apiURL = environment.apiKey + "/auth";
 
     private user = new BehaviorSubject<String | null>(localStorage.getItem("username"));
-    private profilePictureUri = new BehaviorSubject<String | null>(localStorage.getItem("pictureUri"));
+    private profilePictureUri = new BehaviorSubject<string | null>(localStorage.getItem("pictureUri"));
     user$ = this.user.asObservable();
     profilePictureUri$ = this.profilePictureUri.asObservable();
+    timeStamp: number | null = null;
   
     constructor(private httpClient: HttpClient, private router: Router) { }
   
@@ -56,5 +57,17 @@ export class AuthentificationService {
 
     setUser(value: String) {
         this.user.next(value);
+    }
+
+    setLinkPicture(url: string) {
+      localStorage.setItem('pictureUri', environment.serverKey + "/images/" + url)
+      this.timeStamp = (new Date()).getTime();
+    }
+
+    getLinkPicture(){
+      if(this.timeStamp) {
+        return this.profilePictureUri.value + '?' + this.timeStamp;
+      }
+      return this.profilePictureUri.value;
     }
 }

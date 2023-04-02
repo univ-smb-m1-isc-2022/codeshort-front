@@ -17,15 +17,13 @@ export class HeaderComponent implements OnInit {
   searchInput!: String;
   topics: String[] = [];
   searchTopics : String[] = [];
-  pictureUri$!: Observable<String | null>;
-localStorage: any;
+  localStorage: any;
 
-  constructor(private router: Router, private authentificationService: AuthentificationService, private anecdotesService : AnecdotesService) { }
+  constructor(private router: Router, public authentificationService: AuthentificationService, private anecdotesService : AnecdotesService) { }
 
   ngOnInit(): void {
 
     this.user$ = this.authentificationService.user$;
-    this.pictureUri$ = this.authentificationService.profilePictureUri$;
 
     this.anecdotesService.getAllTopics().subscribe(data => {
       data.topics.forEach((element: { name: String; }) => {
