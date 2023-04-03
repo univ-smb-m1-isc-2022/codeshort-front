@@ -5,6 +5,7 @@ import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { Anecdote } from 'src/models/anecdote.model';
 import { Vote } from 'src/models/vote.model';
 import { DialogReportComponent } from '../dialog-report/dialog-report.component';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-anecdote',

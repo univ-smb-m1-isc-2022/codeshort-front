@@ -42,6 +42,13 @@ export class AnecdotesService {
       }
     }
 
+    getOneAnecdote(anecdoteId : number) {
+      return this.httpClient.get<any>(this.apiURL + "/" + anecdoteId)
+        .pipe(
+          catchError(this.errorHandler)
+        )
+    }
+
     getAllTopics(): Observable<any> {
       return this.httpClient.get<any>(environment.apiKey + "/topic")
         .pipe(

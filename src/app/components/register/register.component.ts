@@ -15,7 +15,7 @@ import { DialogFavoriteTopicsComponent } from '../dialog-favorite-topics/dialog-
 export class RegisterComponent {
   userRegister = new FormGroup({
     username: new FormControl(
-      '', [Validators.required, Validators.pattern("^[A-Za-z][A-Za-z0-9_]{7,29}$")]
+      '', [Validators.required, Validators.pattern("^[A-Za-z][A-Za-z0-9_]{3,29}$")]
     ),
     email: new FormControl(
       '', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
