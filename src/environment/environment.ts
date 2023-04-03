@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiKey: 'https://codeshort.api.oups.net/api',
-    serverKey: 'https://codeshort.api.oups.net'
+    apiKey: 'http://localhost:8080/api',
+    serverKey: 'http://localhost:8080'
 };
   
