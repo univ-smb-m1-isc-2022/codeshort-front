@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   user$!: Observable<String | null>;
   anecdoteState = "inview";
   canRoll = true;
+  touchStartY: number = 0;
   filter: "aléatoire" | "populaire" = "aléatoire";
 
   constructor(
@@ -66,8 +67,8 @@ export class HomeComponent implements OnInit {
 
   @HostListener('wheel', ['$event'])
   public onViewportScroll() {
-    let wheelEvent: WheelEvent = event as WheelEvent
     if(this.canRoll){
+      let wheelEvent: WheelEvent = event as WheelEvent
       this.canRoll = false;
       if(wheelEvent.deltaY > 0) {
         this.anecdoteState = "bottom"
@@ -77,6 +78,38 @@ export class HomeComponent implements OnInit {
         }, 500);
       }
       else if(wheelEvent.deltaY < 0) {
+        this.anecdoteState = "top"
+        setTimeout(() => {
+          this.previous()
+          this.anecdoteState = "inview"
+        }, 500);
+      }
+      setTimeout(() => {
+        this.canRoll = true;
+      }, 800);
+    }
+  }  
+
+  public touchStart(event: any) {
+    if(this.canRoll) {
+      let touchEvent: TouchEvent = event as TouchEvent;
+      this.touchStartY = touchEvent.changedTouches[0].clientY;
+    }
+  }
+
+  public touchEnd(event: any) {
+    if(this.canRoll) {
+      this.canRoll = false;
+      let touchEvent: TouchEvent = event as TouchEvent;
+      let touchEndY = touchEvent.changedTouches[0].clientY;
+      if(this.touchStartY < touchEndY) {
+        this.anecdoteState = "bottom"
+        setTimeout(() => {
+          this.next()
+          this.anecdoteState = "inview"
+        }, 500);
+      }
+      else if(this.touchStartY > touchEndY) {
         this.anecdoteState = "top"
         setTimeout(() => {
           this.previous()
