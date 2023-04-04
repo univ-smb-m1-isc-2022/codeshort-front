@@ -28,8 +28,10 @@
             <ng-template #checkStarred><img src="../../../assets/images/star_checked.svg"/></ng-template>
             <ng-template #notCheckStarred><img src="../../../assets/images/star.svg"/></ng-template>
         </div>
-        <div (click)="goToProfil()">
-            <img src="../../../assets/images/user.svg"/>
+        <div (click)="goToProfil()" class="profileLink">
+            <div *ngIf="anecdote.pictureUri != null; then pictureUri else notPictureUri"></div>
+            <ng-template #pictureUri><img class="profil" [src]="anecdote.pictureUri"/></ng-template>
+            <ng-template #notPictureUri><img src="../../../assets/images/user.svg"/></ng-template>
             {{ anecdote.owner }}
         </div>
         <div (click)="report()"><img class="warning" src="../../../assets/images/warning.svg"/></div>

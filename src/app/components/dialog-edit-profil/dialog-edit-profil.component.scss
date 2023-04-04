@@ -29,8 +29,9 @@
 
 .profil {
     margin-top: 10px;
-    width: same-as-height;
-    height: 80%;
+    object-fit: cover;
+    width: 10vw;
+    height: 10vw;
     border-radius: 50%;
 }
 

@@ -5,6 +5,7 @@ import { Observable, of, Subscription } from "rxjs";
 import { AnecdotesService } from "src/app/services/anecdotes.service";
 import { Anecdote } from "src/models/anecdote.model";
 import { Comment } from "src/models/comment.model";
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-comment',
@@ -42,7 +43,8 @@ export class CommentComponent implements OnInit, OnDestroy {
             downvotes: data.anecdote.downvotes,
             starred: data.anecdote.starred,
             owner: data.anecdote.author,
-            vote: data.anecdote.vote
+            vote: data.anecdote.vote,
+            pictureUri: environment.serverKey + "/images/" + data.anecdote.pictureUri
           }
           let anecdotes = [anecdote];
           this.anecdoteService.setAnecdotes(anecdotes);

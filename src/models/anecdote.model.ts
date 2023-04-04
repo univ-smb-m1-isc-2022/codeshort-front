@@ -9,4 +9,5 @@ export class Anecdote {
     starred!: boolean;
     owner!: string;
     vote !: Vote;
+    pictureUri !: string;
 }

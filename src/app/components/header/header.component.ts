@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +30,8 @@ export class HeaderComponent implements OnInit {
         this.topics.push(element.name)
       });
     });
+
+    console.log(this.authentificationService.getLinkPicture())
 
   }
 
@@ -60,7 +62,8 @@ export class HeaderComponent implements OnInit {
             downvotes: anecdote.downvotes,
             starred: anecdote.starred,
             owner: anecdote.author,
-            vote: anecdote.vote
+            vote: anecdote.vote,
+            pictureUri: environment.serverKey + "/images/" + anecdote.pictureUri
           });
         });
         this.anecdotesService.setAnecdotes(tmp);

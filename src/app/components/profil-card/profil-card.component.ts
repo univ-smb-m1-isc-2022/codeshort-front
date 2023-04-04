@@ -21,7 +21,7 @@ export class ProfilCardComponent implements OnInit {
   starredFilter!: boolean;
   userProps: UserProps | null = null;
 
-  constructor(private authentificationService: AuthentificationService, 
+  constructor(public authentificationService: AuthentificationService, 
     private anecdotesService: AnecdotesService, 
     private userService : UserService,
     public dialog: MatDialog) { }
@@ -32,6 +32,8 @@ export class ProfilCardComponent implements OnInit {
     this.userService.getUserProps(this.user).subscribe(data => {
       if(data.profilePictureURI)
         data.profilePictureURI = environment.serverKey + "/images/" + data.profilePictureURI;
+      else
+        data.profilePictureURI = "../../../assets/images/user.svg";
       this.userProps = data;
     });
   }
@@ -68,7 +70,8 @@ export class ProfilCardComponent implements OnInit {
           downvotes: e.downvotes,
           starred: e.starred,
           owner: e.author,
-          vote: e.vote
+          vote: e.vote,
+          pictureUri: environment.serverKey + "/images/" + e.pictureUri
         };
         anecdotesTmp.push(anecdote);
       });
@@ -89,7 +92,8 @@ export class ProfilCardComponent implements OnInit {
           downvotes: e.downvotes,
           starred: e.starred,
           owner: e.author,
-          vote: e.vote
+          vote: e.vote,
+          pictureUri: environment.serverKey + "/images/" + e.pictureUri
         };
         anecdotesTmp.push(anecdote);
       });

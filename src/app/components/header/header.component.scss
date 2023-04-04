@@ -49,12 +49,12 @@
 }
 
 .icon {
-    width: same-as-height;
+    width: clamp(12px, 5vw, 36px);
     height: clamp(12px, 5vw, 36px);
 }
 
 img {
-    width: same-as-height;
+    width: clamp(12px, 5vw, 50px);
     height: clamp(12px, 5vw, 50px);
     border-radius: 50%;
 }
@@ -62,6 +62,7 @@ img {
 .profil {
     padding: 0;
     padding-right: 5px;
+    object-fit: cover;
     white-space: nowrap;
 }
 

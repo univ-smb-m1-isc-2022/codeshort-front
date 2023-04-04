@@ -41,6 +41,7 @@ export class RegisterComponent {
       var username = this.userRegister.get('username')!.value;
       localStorage.setItem('token',data.token);
       localStorage.setItem('username',username!);
+      localStorage.setItem('pictureUri',"../../../assets/images/user.svg");
       this.authenticationService.setUser(username!);
 
       const dialogRef = this.dialog.open(DialogFavoriteTopicsComponent, {

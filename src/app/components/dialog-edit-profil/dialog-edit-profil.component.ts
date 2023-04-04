@@ -15,10 +15,7 @@ export class DialogEditProfilComponent {
     file: any = null
 
     ngOnInit(): void {
-      if(this.data.picture == null)
-        this.URL = "../../../assets/images/profil.jpg";
-      else
-        this.URL = this.data.picture
+      this.URL = this.data.picture
     }
 
     useImage(event: any) {

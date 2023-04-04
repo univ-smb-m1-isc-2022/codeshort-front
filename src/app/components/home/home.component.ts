@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { Anecdote } from 'src/models/anecdote.model';
+import { environment } from 'src/environment/environment';
 
 
 @Component({
@@ -107,6 +108,7 @@ export class HomeComponent implements OnInit {
     this.anecdotesService.getRandomAnecdotes().subscribe(data => {
       var anecdotesTmp: Anecdote[] = [];
       data.anecdotes.forEach((e : any) => {
+        console.log(e)
         var anecdote: Anecdote = {
           id: e.id,
           topics: e.topics,
@@ -115,7 +117,8 @@ export class HomeComponent implements OnInit {
           downvotes: e.downvotes,
           starred: e.starred,
           owner: e.author,
-          vote: e.vote
+          vote: e.vote,
+          pictureUri: environment.serverKey + "/images/" + e.pictureUri
         };
         anecdotesTmp.push(anecdote);
       });
@@ -135,7 +138,8 @@ export class HomeComponent implements OnInit {
           downvotes: e.downvotes,
           starred: e.starred,
           owner: e.author,
-          vote: e.vote
+          vote: e.vote,
+          pictureUri: environment.serverKey + "/images/" + e.pictureUri
         };
         anecdotesTmp.push(anecdote);
       });
