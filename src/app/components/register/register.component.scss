@@ -66,9 +66,13 @@ form input{
 }
 
 .back-login {
-    border: none;
     background-color: white;
-    color: black;
+    color: rgb(0,133,255);
+    border: none;
+    cursor: pointer;
+}
+
+.no-account-label {
     opacity: 0.7;
 }
 
@@ -78,3 +82,10 @@ form input{
     border: none;
 }
 
+.arrow-back {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 50px;
+    height: 50px;
+}

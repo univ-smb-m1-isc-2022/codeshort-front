@@ -34,7 +34,6 @@ export class CommentComponent implements OnInit, OnDestroy {
         let url = this.router.url;
         let urlSplit = url.split('/');
         this.anecdoteService.getOneAnecdote(parseInt(urlSplit[urlSplit.length-1])).subscribe(data => {
-          console.log(data);
           let anecdote = {
             id: data.anecdote.id,
             topics: data.anecdote.topics,
@@ -68,6 +67,10 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.anecdoteSubscription.unsubscribe();
+  }
+
+  goToHome() : void {
+    this.router.navigateByUrl('home');
   }
 
 }

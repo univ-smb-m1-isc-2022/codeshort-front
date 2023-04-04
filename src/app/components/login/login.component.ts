@@ -26,6 +26,10 @@ export class LoginComponent {
     });
 
   }
+
+  goToHome() : void {
+    this.router.navigateByUrl('home');
+  }
   
   goToRegister() : void {
     this.router.navigateByUrl('register');

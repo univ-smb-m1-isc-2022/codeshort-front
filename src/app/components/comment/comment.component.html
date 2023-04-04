@@ -1,5 +1,6 @@
 <div class="main">
     <div class="anecdote-box">
+        <a class="arrow-back" (click)="goToHome()"><img src="../../assets/images/arrow-back.png"></a>
         <app-anecdote [anecdote]="anecdote$ | async" class="anecdote"></app-anecdote>
     </div>
     <div class="box">

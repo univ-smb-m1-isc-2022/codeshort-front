@@ -71,6 +71,10 @@ export class RegisterComponent {
     this.router.navigateByUrl('login');
   }
 
+  goToHome() : void {
+    this.router.navigateByUrl('home');
+  }
+
   get usernameField(){
     return this.userRegister.get('username')
   }

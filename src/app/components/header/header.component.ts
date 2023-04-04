@@ -30,9 +30,6 @@ export class HeaderComponent implements OnInit {
         this.topics.push(element.name)
       });
     });
-
-    console.log(this.authentificationService.getLinkPicture())
-
   }
 
   goToLogin() : void {
