@@ -12,7 +12,10 @@
         <button (click)="openDialog()" class="btn">Editer le profil</button>
     </ng-template>
 
-    <button (click)="goToGitHub()" class="btn">GitHub</button>
+    <div *ngIf="userProps?.gitURI != null; then showingGithub"></div>
+    <ng-template #showingGithub>
+        <button (click)="goToGitHub()" class="btn">GitHub</button>
+    </ng-template>
 
     <div (click)="showStarred()" class="starred">
         <div *ngIf="starredFilter; then showingStarred else notShowingStarred"></div>

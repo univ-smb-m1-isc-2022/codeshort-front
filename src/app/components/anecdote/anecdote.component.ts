@@ -5,7 +5,6 @@ import { AnecdotesService } from 'src/app/services/anecdotes.service';
 import { Anecdote } from 'src/models/anecdote.model';
 import { Vote } from 'src/models/vote.model';
 import { DialogReportComponent } from '../dialog-report/dialog-report.component';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-anecdote',
@@ -78,16 +77,18 @@ export class AnecdoteComponent {
   }
 
   report() {
-    const dialogRef = this.dialog.open(DialogReportComponent, {
-      width: '40%',
-      data: {anecdote: this.anecdote?.id}
-    });
+    if (this.anecdote) {
+      const dialogRef = this.dialog.open(DialogReportComponent, {
+        width: '40%',
+        data: {anecdote: this.anecdote?.id}
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result != null && this.anecdote){
-        this.anecdotesService.reportAnecdote(this.anecdote.id, result);
-      }
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result != null && this.anecdote){
+          this.anecdotesService.reportAnecdote(this.anecdote.id, result);
+        }
+      });
+    }
   }
 
 }

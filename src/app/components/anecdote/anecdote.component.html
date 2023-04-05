@@ -11,7 +11,7 @@
     </div>
 
     <div class="interactions">
-        <div (click)="upvoteClicked()" >
+        <div (click)="upvoteClicked()">
             <div *ngIf="anecdote.vote == 'UPVOTE'; then checkUpvote else notCheckUpvote"></div>
             <ng-template #checkUpvote><img src="../../../assets/images/upvote_checked.svg"/></ng-template>
             <ng-template #notCheckUpvote><img src="../../../assets/images/upvote.svg"/></ng-template>

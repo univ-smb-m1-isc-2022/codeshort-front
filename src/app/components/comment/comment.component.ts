@@ -56,7 +56,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   }
 
   onSubmitForm(form: NgForm) {
-    if(form.value.content && form.value.content != '') {
+    if(form.value.content.replace(/\s/g, '').length) {
       this.anecdoteService.createComment(form.value, this.anecdoteId).subscribe(() => {
         this.anecdoteService.getAnecdoteComments(this.anecdoteId).subscribe(data => {
           this.comments$ = of(data.comments);
