@@ -29,6 +29,7 @@ export class ProfilCardComponent implements OnInit {
   ngOnInit(): void {
     this.starredFilter = false;
     this.getAll();
+    console.log(this.user)
     this.userService.getUserProps(this.user).subscribe(data => {
       if(data.profilePictureURI)
         data.profilePictureURI = environment.serverKey + "/images/" + data.profilePictureURI;
@@ -71,7 +72,7 @@ export class ProfilCardComponent implements OnInit {
           starred: e.starred,
           owner: e.author,
           vote: e.vote,
-          pictureUri: environment.serverKey + "/images/" + e.pictureUri
+          pictureUri: e.pictureUri != null ? environment.serverKey + "/images/" + e.pictureUri : null
         };
         anecdotesTmp.push(anecdote);
       });
@@ -93,7 +94,7 @@ export class ProfilCardComponent implements OnInit {
           starred: e.starred,
           owner: e.author,
           vote: e.vote,
-          pictureUri: environment.serverKey + "/images/" + e.pictureUri
+          pictureUri: e.pictureUri != null ? environment.serverKey + "/images/" + e.pictureUri : null
         };
         anecdotesTmp.push(anecdote);
       });

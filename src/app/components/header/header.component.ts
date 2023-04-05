@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
             starred: anecdote.starred,
             owner: anecdote.author,
             vote: anecdote.vote,
-            pictureUri: environment.serverKey + "/images/" + anecdote.pictureUri
+            pictureUri: anecdote.pictureUri != null ? environment.serverKey + "/images/" + anecdote.pictureUri : null
           });
         });
         this.anecdotesService.setAnecdotes(tmp);

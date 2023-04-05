@@ -43,7 +43,7 @@ export class CommentComponent implements OnInit, OnDestroy {
             starred: data.anecdote.starred,
             owner: data.anecdote.author,
             vote: data.anecdote.vote,
-            pictureUri: environment.serverKey + "/images/" + data.anecdote.pictureUri
+            pictureUri: data.anecdote.pictureUri != null ? environment.serverKey + "/images/" + data.anecdote.pictureUri : null
           }
           let anecdotes = [anecdote];
           this.anecdoteService.setAnecdotes(anecdotes);

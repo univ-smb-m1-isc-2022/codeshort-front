@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
           starred: e.starred,
           owner: e.author,
           vote: e.vote,
-          pictureUri: environment.serverKey + "/images/" + e.pictureUri
+          pictureUri: e.pictureUri != null ? environment.serverKey + "/images/" + e.pictureUri : null
         };
         anecdotesTmp.push(anecdote);
       });
@@ -171,7 +171,7 @@ export class HomeComponent implements OnInit {
           starred: e.starred,
           owner: e.author,
           vote: e.vote,
-          pictureUri: environment.serverKey + "/images/" + e.pictureUri
+          pictureUri: e.pictureUri != null ? environment.serverKey + "/images/" + e.pictureUri : null
         };
         anecdotesTmp.push(anecdote);
       });
